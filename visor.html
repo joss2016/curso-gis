@@ -51,11 +51,11 @@
 		var init = function(){
 			// Valores de los principales atributos de nuestra variable propiedades que seran necesarios
 			var proyeccion = new OpenLayers.Projection("EPSG:4326"); // EPSG:900913
-			var controlNavegacion = new OpenLayers.Control.Navigation();
-			var controlZoom = new OpenLayers.Control.PanZoomBar();
+			var controlNavegacion = new OpenLayers.Control.Navigation(); //objeto para la navegacion
+			var controlZoom = new OpenLayers.Control.PanZoomBar(); //Objeto para el zoom de tipo panzoombar
 			//var controlZoom = new OpenLayers.Control.Zoom();
 
-			// Valores definidos de la variable propiedades
+			// Propiedades del objeto map
 			var propiedades = {
 				projection: proyeccion,
 				units: 'm',
@@ -63,11 +63,15 @@
 			};
 
 			//Variable principal de tipo mapa sobre el cual trabajaremos
+			//Creacion de la instancia de la clase map
 			var map = new OpenLayers.Map("mapa", propiedades );
 			
-			//Capa LayerOSM - funcion definida para carga de layer 
+			//Capa LayerOSM (Open Street Map)- viene configurado por defecto para que sea un Layer de tipo Base 
 			var layerOSM = new OpenLayers.Layer.OSM();
 			map.addLayer(layerOSM); //Adicionamos al mapa
+			/* Existen otras propiedades q podemos utilizar fuera del addLayer.
+			Como son addControl, removeLayer, removeControl, setLayer, setControl, getLayer, getControl etc. averiguar
+			*/
 			
 		}
 		//1 Cargamos la funcion init, para desplegar el mapa esto con el Dom
