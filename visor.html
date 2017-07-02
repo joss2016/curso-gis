@@ -4,9 +4,11 @@
 	<meta charset="utf-8">
 	<title>Visor Simple OpenLayers</title>
 	
+	<!-- Tambien se puede utilizar de forma local descargando openlayers2 y adicionandolo a nuestro proyecto, la ruta absoluta varia hasta 2.12 y es la misma la ruta relativa a partir de /theme -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css">
 
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
+	<!--En algunos servers hay un problema con el proxy, para lo cual se recomienda quitar el protocolo en estas direcciones y dejar //cdnjs.cloud.... y asi se resuelve el problema -->
 
 
 
@@ -26,9 +28,15 @@
 				background-color:darkblue;
 			}
 
+			/* Objetos HTML */
+			.cabecera h2 {
+				color: white;
+
+			}
+
 			/* ID */
 			#mapa{
-				height:500px;
+				height:300px;
 				width: 600px;
 				border: solid 3px darkblue;
 
@@ -36,7 +44,32 @@
 		</style>
 
 	<script type="text/javascript">
-		//codigo javascript
+		//codigo javascript		
+		var init = function(){
+			// Valores de los principales atributos de nuestra variable propiedades que seran necesarios
+			var proyeccion = new OpenLayers.Projection("EPSG:4326"); // EPSG:900913
+			var controlNavegacion = new OpenLayers.Control.Navigation();
+			var controlZoom = new OpenLayers.Control.PanZoomBar();
+			//var controlZoom = new OpenLayers.Control.Zoom();
+
+			// Valores definidos de la variable propiedades
+			var propiedades = {
+				projection: proyeccion,
+				units: 'm',
+				controls: [controlNavegacion, controlZoom]
+			};
+
+			//Variable principal de tipo mapa sobre el cual trabajaremos
+			var map = new OpenLayers.Map("mapa", propiedades );
+			
+			//Capa LayerOSM - funcion definida para carga de layer 
+			var layerOSM = new OpenLayers.Layer.OSM();
+			map.addLayer(layerOSM); //Adicionamos al mapa
+			
+		}
+		//1 Cargamos la funcion init, para desplegar el mapa esto con el Dom
+		window.onload = init;
+
 	</script>
 
 </head>
