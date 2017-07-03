@@ -8,9 +8,17 @@
 
 
 	<!-- Tambien se puede utilizar de forma local descargando openlayers2 y adicionandolo a nuestro proyecto, la ruta absoluta varia hasta 2.12 y es la misma la ruta relativa a partir de /theme -->
+	<!--
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css">
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
+	-->
+
+	<!-- Rutas de la misma version pero con ol2 local descargado git --> 
+	<link rel="stylesheet" href="ol2/theme/default/style.css">
+	
+	<script src="ol2/lib/OpenLayers.js"></script>
+
 
 	<!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/theme/default/style.css">
 
@@ -106,7 +114,12 @@
 			//Nota: Si esta el Satelital no se puede cargar el OSM, pq entre Capas Base son mutuamente excluyentes, solo puede estar una
 
 			var layerGoogleSatelital = new OpenLayers.Layer.Google("Mapa Satelital",{type:google.maps.MapTypeId.SATELLITE});
-			map.addLayer(layerGoogleSatelital);
+			var layerGoogleHibrido = new OpenLayers.Layer.Google("Mapa Hibrido",{type:google.maps.MapTypeId.HYBRID});
+			var layerGoogleTerrain = new OpenLayers.Layer.Google("Mapa Terrain",{type:google.maps.MapTypeId.TERRAIN});
+
+			//map.addLayer(layerGoogleSatelital);		//Solo carga un layer
+
+			map.addLayers([layerGoogleSatelital,layerGoogleHibrido,layerGoogleTerrain]); //Carga varios Layers a la vez
 
 
 			//Control de cambio de Capas Adicionado
