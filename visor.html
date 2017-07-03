@@ -168,7 +168,7 @@
 
 
 			//Capas utilizando servicios web WMS (Web Map Service) Geobolivia, ine, inra, etc
-			//Preparando variables necesarias
+			//Preparando variables necesarias para nuestro WMS
 			var nombreWMS = "Limites departamentales";
 			var urlWMS = "http://geo.gob.bo/geoserver/wms";
 			var propiedadesWMS = {
@@ -176,14 +176,32 @@
 					transparent: true
 				};
 
-			//capa para el wms
+			//Definiendo la capa principal de nuestro WMS
 			var layerDepartamentosWMS = new OpenLayers.Layer.WMS(
 				nombreWMS,
 				urlWMS,
 				propiedadesWMS
 				);
+			map.addLayer(layerDepartamentosWMS);	//adicionando CapaWMS
 
-			map.addLayer(layerDepartamentosWMS);
+
+
+			//Configuracion para mostrar la region de Bolivia
+			// librerias de google : Latitud y Longitud
+			// OpenLayers : Longitud y Latitud
+			// Longitud -64.819336 , Latitud -17.379999
+			var LonLat = new OpenLayers.LonLat(-64.819336, -17.379999); //objeto longitudLatitud
+			var zoom = 5;	//valor entero del zoom 1 lejos 7 cerca
+			/*var LonLatTransformado = LonLat.transform(
+					new OpenLayers.Projection("EPSG:4326"),
+					new OpenLayers.Projection("EPSG:900913")
+				);		//Objeto que realiza la transformacion entre proyecciones Geo
+				*/
+			var LonLatTransformado = LonLat.transform(
+					new OpenLayers.Projection("EPSG:4326"),
+					map.getProjection()		//	new OpenLayers.Projection("EPSG:900913")
+				);		//Objeto que realiza la transformacion capturando la proyeccion del mapa
+			map.setCenter(LonLatTransformado,zoom);
 
 
 		}
