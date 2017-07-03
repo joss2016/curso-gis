@@ -13,6 +13,25 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
 	<!--En algunos servers hay un problema con el proxy, para lo cual se recomienda quitar el protocolo en estas direcciones y dejar //cdnjs.cloud.... y asi se resuelve el problema -->
 
+	<!-- Para adicionar un layer desde google, debemos adicionar un script javascript donde pondremos nuestra API KEY generada en google, la cual debe estar direccionada a
+		https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap
+
+	y para generar el key poner en google = key api googlemaps
+	y elegimos obtener una clave o autorizacion y nos enviara a la pagina respectiva
+	
+	una vez ahi... hacemos un click en el boton
+	obtener una clave y la copiamos a nuestro enlace
+	justo en la parte donde dice YOUR_API_KEY
+	y listo (ojo q para esto debemos tener nuestra cuenta de google pues es requisito) Para copiar utilizar el boton del fondo en la pagina de google
+
+	key generado
+	AIzaSyDlFpq9ljqjwhvFNzVQwwwZa6xghYIpCCI
+	AIzaSyDDmnnUVSHEsk8MfMKmttlSX5K3MTlkIJM
+	-->
+	<!--script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+  type="text/javascript"></script-->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDmnnUVSHEsk8MfMKmttlSX5K3MTlkIJM&callback=initMap"
+  type="text/javascript"></script>
 
 
 	<style type="text/css">
@@ -67,12 +86,24 @@
 			var map = new OpenLayers.Map("mapa", propiedades );
 			
 			//Capa LayerOSM (Open Street Map)- viene configurado por defecto para que sea un Layer de tipo Base 
-			var layerOSM = new OpenLayers.Layer.OSM();
-			map.addLayer(layerOSM); //Adicionamos al mapa
-			/* Existen otras propiedades q podemos utilizar fuera del addLayer.
-			Como son addControl, removeLayer, removeControl, setLayer, setControl, getLayer, getControl etc. averiguar
-			*/
+
+			//var layerOSM = new OpenLayers.Layer.OSM();
+			//map.addLayer(layerOSM); 
+
+			//Adicionamos al mapa
+			 //Existen otras propiedades q podemos utilizar fuera del addLayer.
+			//Como son addControl, removeLayer, removeControl, setLayer, setControl, getLayer, getControl etc. averiguar
 			
+
+
+			//Capa google
+			//var layerGoogleSatelital = new openlayers.layer.Google("Mapa Satelital",{type:google.maps.MapTypeId.TYPEMAP}); // donde TYPEMAP se reemplaza con el tipo de mapa q utilizaremos
+			//Nota: Si esta el Satelital no se puede cargar el OSM, pq entre Capas Base son mutuamente excluyentes, solo puede estar una
+
+			var layerGoogleSatelital = new OpenLayers.Layer.Google("Mapa Satelital",{type:google.maps.MapTypeId.SATELLITE});
+			map.addLayer(layerGoogleSatelital);
+
+
 		}
 		//1 Cargamos la funcion init, para desplegar el mapa esto con el Dom
 		window.onload = init;
