@@ -17,7 +17,7 @@
 	<!-- Rutas de la misma version pero con ol2 local descargado git --> 
 	<link rel="stylesheet" href="ol2/theme/default/style.css">
 	
-	<script src="ol2/lib/OpenLayers.js"></script>
+	<script type="text/javascript" src="ol2/lib/OpenLayers.js"></script>
 
 
 	<!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/theme/default/style.css">
@@ -45,6 +45,10 @@
   type="text/javascript"></script-->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDmnnUVSHEsk8MfMKmttlSX5K3MTlkIJM&callback=initMap"
   type="text/javascript"></script>
+
+  <!-- Agregando Tiles - Servicio capa de fondo de mapa -->
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js"></script>
+  <!-- Si se quiere saber mas acerca de los tipos de estilos que ofrece la libreria stamen, debemos ir a la direccion de esta libreria, y buscar la variable odb1  //toner 2011 flavors -->
 
 
 	<style type="text/css">
@@ -109,7 +113,7 @@
 			
 
 
-			//Capa google
+			//Capas google
 			//var layerGoogleSatelital = new openlayers.layer.Google("Mapa Satelital",{type:google.maps.MapTypeId.TYPEMAP}); // donde TYPEMAP se reemplaza con el tipo de mapa q utilizaremos
 			//Nota: Si esta el Satelital no se puede cargar el OSM, pq entre Capas Base son mutuamente excluyentes, solo puede estar una
 
@@ -125,6 +129,13 @@
 			//Control de cambio de Capas Adicionado
 			var controlCapas = new OpenLayers.Control.LayerSwitcher();
 			map.addControl(controlCapas); //Adicionamos a los controles con un metodo propio de OpenLayers
+
+			//Capa Stamen
+			var layerStamen = new OpenLayers.Layer.Stamen("toner");
+			//var layerStamen = new OpenLayers.Layer.Stamen("toner-lite"); // para ver mas variedades consultar libreria
+			map.addLayer(layerStamen);
+
+			
 
 
 		}
