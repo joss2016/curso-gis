@@ -8,16 +8,18 @@
 
 
 	<!-- Tambien se puede utilizar de forma local descargando openlayers2 y adicionandolo a nuestro proyecto, la ruta absoluta varia hasta 2.12 y es la misma la ruta relativa a partir de /theme -->
-	<!--
+	
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/theme/default/style.min.css">
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script>
-	-->
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.min.js"></script> -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.12/OpenLayers.js"></script>
+	
 
 	<!-- Rutas de la misma version pero con ol2 local descargado git --> 
-	<link rel="stylesheet" href="ol2/theme/default/style.css">
+	<!--<link rel="stylesheet" href="ol2/theme/default/style.css">
 	
-	<script type="text/javascript" src="ol2/lib/OpenLayers.js"></script>
+	<script type="text/javascript" src="ol2/lib/OpenLayers.js"></script>-->
 
 
 	<!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/theme/default/style.css">
@@ -69,7 +71,8 @@
 
 			/* Objetos HTML */
 			.cabecera h2 {
-				color: white;
+				color: #fff;
+				margin-top: 0;
 
 			}
 
@@ -86,7 +89,8 @@
 		//codigo javascript		
 		var init = function(){
 			// Valores de los principales atributos de nuestra variable propiedades que seran necesarios
-			var proyeccion = new OpenLayers.Projection("EPSG:4326"); // EPSG:900913
+			//var proyeccion = new OpenLayers.Projection("EPSG:4326"); // EPSG:900913
+			var proyeccion = new OpenLayers.Projection("EPSG:900913");
 			var controlNavegacion = new OpenLayers.Control.Navigation(); //objeto para la navegacion
 			var controlZoom = new OpenLayers.Control.PanZoomBar(); //Objeto para el zoom de tipo panzoombar
 			//var controlZoom = new OpenLayers.Control.Zoom();
@@ -160,6 +164,26 @@
         		});
 
 			map.addLayer(layerMapBox);
+
+
+
+			//Capas utilizando servicios web WMS (Web Map Service) Geobolivia, ine, inra, etc
+			//Preparando variables necesarias
+			var nombreWMS = "Limites departamentales";
+			var urlWMS = "http://geo.gob.bo/geoserver/wms";
+			var propiedadesWMS = {
+					layers: 'fondos:departamento1',
+					transparent: true
+				};
+
+			//capa para el wms
+			var layerDepartamentosWMS = new OpenLayers.Layer.WMS(
+				nombreWMS,
+				urlWMS,
+				propiedadesWMS
+				);
+
+			map.addLayer(layerDepartamentosWMS);
 
 
 		}
