@@ -130,6 +130,10 @@
 			var controlCapas = new OpenLayers.Control.LayerSwitcher();
 			map.addControl(controlCapas); //Adicionamos a los controles con un metodo propio de OpenLayers
 
+			//control de posicion del cursor
+			var controlCursor = new OpenLayers.Control.MousePosition();
+			map.addControl(controlCursor);
+
 			//Capa Stamen
 			var layerStamen = new OpenLayers.Layer.Stamen("toner");
 			//var layerStamen = new OpenLayers.Layer.Stamen("toner-lite"); // para ver mas variedades consultar libreria
