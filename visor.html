@@ -75,7 +75,7 @@
 
 			/* ID */
 			#mapa{
-				height:300px;
+				height:450px;
 				width: 600px;
 				border: solid 3px darkblue;
 
@@ -133,6 +133,12 @@
 			//control de posicion del cursor
 			var controlCursor = new OpenLayers.Control.MousePosition();
 			map.addControl(controlCursor);
+
+			//control miniMapa
+			var controlMiniMapa = new OpenLayers.Control.OverviewMap();
+			map.addControl(controlMiniMapa);
+
+
 
 			//Capa Stamen
 			var layerStamen = new OpenLayers.Layer.Stamen("toner");
