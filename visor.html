@@ -184,6 +184,63 @@
 				);
 			map.addLayer(layerDepartamentosWMS);	//adicionando CapaWMS
 
+			//Cargamos la capa Eolico
+			var layerEolico = new OpenLayers.Layer.WMS(
+					"Mapa Eolico",
+					"http://192.168.42.253:8080/geoserver/wms",
+					{
+						layers: 'curso-gis:EOLICO',
+						transparent: true
+					}
+				);
+			map.addLayer(layerEolico);
+
+			var layerProvincias = new OpenLayers.Layer.WMS(
+					"Mapa Provincias",
+					"http://192.168.42.253:8080/geoserver/wms",
+					{
+						layers: 'curso-gis:provincias_20',
+						transparent: true
+					}
+				);
+			map.addLayer(layerProvincias);
+
+			var layerSecciones = new OpenLayers.Layer.WMS(
+					"Mapa Secciones",
+					"http://192.168.42.253:8080/geoserver/wms",
+					{
+						layers: 'curso-gis:secciones_20',
+						transparent: true
+					}
+				);
+			map.addLayer(layerSecciones);
+
+			var layerHojaMapa = new OpenLayers.Layer.WMS(
+					"Hojas Mapa",
+					"http://192.168.42.253:8080/geoserver/wms",
+					{
+						layers: 'curso-gis:50-20UTM',
+						transparent: true
+					}
+				);
+			map.addLayer(layerHojaMapa);
+
+
+			// Capas Json
+			var layerJson = new OpenLayers.Layer.Vector(
+					"Capa Uyuni-json",
+					{
+						projection: new OpenLayers.Projection("EPSG:4326"),
+						strategies: [new OpenLayers.Strategy.Fixed()],
+						protocol : new OpenLayers.Protocol.HTTP({
+							url:'./salar_uyuni.json',
+							format: new OpenLayers.Format.GeoJSON()
+						})
+					}
+
+				);
+			map.addLayer(layerJson);
+
 
 
 			//Configuracion para mostrar la region de Bolivia
